@@ -19,6 +19,7 @@ And edit `block_from` and `block_until` variables in the script according to you
 ## 2. Open & Edit `hosts2` file.
 
 In `hosts2`, you will see how each website has been blocked. There's 4 lines to block various subdomains for a single website. You can edit or remove sites from this file however you like. Just duplicate one of the 4-line-blocks, and replace website URL with the URL of the website you want to block.
+
 **<sub>Do NOT edit the website prefix, if you want to block website.net, just replace youtube.com part with website.net and leave the rest as is.</sub>**
 
 
