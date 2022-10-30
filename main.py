@@ -10,9 +10,9 @@ from time import sleep
 #   OUTSIDE OF THE TIME LIMIT YOU'LL SELECT HERE.
 
 path_to_hosts = "C:\Windows\System32\drivers\etc\hosts"
+path_to_edited_hosts_file = "./hosts2"  # EDITED HOSTS FILE
 
-
-path_to_edited_hosts_file = "./hosts2"  # CHANGE THIS TO YOUR EDITED HOSTS FILE
+block_from = 0  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES FROM
 block_until = 20  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES UNTIL
 
 def allow_sites():
@@ -28,11 +28,11 @@ def block_sites():
 
 
 # MAIN CODE WITH EXPLANATIONS,
-# YOU CAN EDIT IF YOU KNOW WHAT YOU'RE DOING.
+# ONLY EDIT IF YOU KNOW WHAT YOU'RE DOING.
 
 while True:
     current_hour = int(datetime.now().strftime("%H"))  # GET CURRENT HOUR AS HH
-    if current_hour < block_until:  # CHECK IF IT'S BEFORE SELECTED HOUR
+    if block_from < current_hour < block_until:  # CHECK IF IT'S BEFORE SELECTED HOUR
         if not os.path.exists(path_to_hosts):  # IF SITES ARE NOT BLOCKED
             block_sites()  # BLOCK THE SITES
     else:  # IF IT'S AFTER SELECTED HOUR
