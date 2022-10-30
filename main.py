@@ -33,10 +33,10 @@ def block_sites():
 
 while True:
     current_hour = int(datetime.now().strftime("%H"))  # GET CURRENT HOUR AS HH
-    if block_from < current_hour < block_until:  # CHECK IF IT'S BEFORE SELECTED HOUR
+    if block_from < current_hour < block_until:  # CHECK IF IT'S BETWEEN THE SELECTED TIME PERIOD
         if not os.path.exists(path_to_hosts):  # IF SITES ARE NOT BLOCKED
             block_sites()  # BLOCK THE SITES
-    else:  # IF IT'S AFTER SELECTED HOUR
+    else:  # IF IT'S NOT IN THE SELECTED TIME PERIOD
         if os.path.exists(path_to_hosts):  # IF SITES ARE BLOCKED
             allow_sites()  # ALLOW THE SITES
     sleep(5)
