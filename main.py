@@ -3,32 +3,33 @@ import shutil
 import subprocess
 from datetime import datetime
 from time import sleep
+path_to_hosts = "C:\Windows\System32\drivers\etc\hosts"
+path_to_edited_hosts_file = "./hosts2"
 
 #   WARNING:
 #   THIS SCRIPT DELETES YOUR CURRENT HOSTS FILE.
 #   DON'T USE IT IF YOU WANT TO BLOCK OTHER SITES
 #   OUTSIDE OF THE TIME LIMIT YOU'LL SELECT HERE.
 
-path_to_hosts = "C:\Windows\System32\drivers\etc\hosts"
-path_to_edited_hosts_file = "./hosts2"  # EDITED HOSTS FILE
 
-block_from = 0  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES FROM
-block_until = 20  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES UNTIL
+block_from = 0  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES FROM !
+block_until = 20  # CHANGE THIS TO THE HOUR YOU WANT TO BLOCK SITES UNTIL !
 
+def ipconfig_renew():
+    subprocess.Popen('ipconfig -flushdns', shell=False)
+    subprocess.Popen('ipconfig -release', shell=False)
+    subprocess.Popen('ipconfig -renew', shell=False)
 def allow_sites():
     os.remove(path_to_hosts)
-    subprocess.Popen('ipconfig -flushdns', shell=False)
-    subprocess.Popen('ipconfig -release', shell=False)
-    subprocess.Popen('ipconfig -renew', shell=False)
+    ipconfig_renew()
+
 def block_sites():
     shutil.copyfile(path_to_edited_hosts_file, path_to_hosts)
-    subprocess.Popen('ipconfig -flushdns', shell=False)
-    subprocess.Popen('ipconfig -release', shell=False)
-    subprocess.Popen('ipconfig -renew', shell=False)
+    ipconfig_renew()
 
 
 # MAIN CODE WITH EXPLANATIONS,
-# ONLY EDIT IF YOU KNOW WHAT YOU'RE DOING.
+# ONLY EDIT THIS PART IF YOU KNOW WHAT YOU'RE DOING.
 
 while True:
     current_hour = int(datetime.now().strftime("%H"))  # GET CURRENT HOUR AS HH
